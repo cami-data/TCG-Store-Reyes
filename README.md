@@ -1,5 +1,6 @@
-  # Proyecto Coderhouse Curso SQL - Com. 81830
-  ## Tienda de TCG y otros
+# Proyecto Coderhouse Curso SQL - Com. 81830
+## Tienda de TCG y otros
+### Autora: Camila Reyes C. para curso Coderhouse.
 
 <p align="center">
 <img width="800" height="565" alt="8b1b00dc-a595-4ca6-9864-dc4e99d40b752" src="https://github.com/user-attachments/assets/7b2810bd-ca8b-4838-a53b-8215e65e07ff" />
@@ -31,15 +32,17 @@ Actualmente, la tienda ha crecido exponencialmente, debido a la creciente popula
 
 ## Diagrama E-R
 
-Agregar el link al PDF de relaciones. Debe ser con ingeniería inversa.
-
+Referirse al PDF 'diagrama_E_R_TCG_Store_Reyes.pdf' en el repositorio.
 
 ## Modelo de Negocios
 
 El modelo de negocios corresponde a un tipo B2C. Principalmente, nos centramos en la venta de cartas y mercadería de distintas franquicias.
+
 El target que la administración tiene en mente es desde los 12 años a los 30 años, y esperan que significativamente pertenezcan al género masculino.
+
 En este momento, solo contamos con una locación, y por el momento, no tenemos ventas por internet, solo en tiendas.
 Se cuenta con un modelo de suscripciones, donde mandamos correos electrónicos con ofertas y descuentos a los clientes que se hayan inscritos. Éstos solo se pueden inscribir recurriendo a la tienda, y por un empleado. Dentro de estos descuentos que enviamos por correo, existe el descuento de cumpleaños, por lo que es importante que este campo sea completado.
+
 Los clientes pueden (o no) asociar sus compras a un empleado. La administración está pensando en implementar un sistema de comisiones.
 En cuanto a promociones, la administración ha determinado que solo se puede aplicar una promoción a los artículos, por cada lapso de tiempo. Es decir, al comprar un artículo, no se le puede aplicar la promoción de 'Black Friday', junto con el 'Descuento de empleado'. Las promociones se aplican a todos los artículos por igual, dentro del periodo estipulado.
 
