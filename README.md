@@ -27,7 +27,7 @@ El objetivo del trabajo es poder descubrir insights del negocio, que puedan ayud
 
 ## Situación Problematica
 
-Actualmente, la tienda ha crecido exponencialmente, debido a la creciente popularidad de las cartas y los juegos de mesa. Por tanto, queremos tener un control más riguroso de los datos que se recolectan de la tienda día a día, tales como: ventas, datos de clientes, etc. Con esto, la administración espera tener un mejor manejo de la tienda y espera seguir expandiéndose. 
+Actualmente, la tienda ha crecido exponencialmente, debido a la creciente popularidad de las cartas y los juegos de mesa. Por tanto, queremos tener un control más riguroso de los datos que se recolectan de la tienda día a día, tales como: ventas, datos de clientes, etc. Con esto, la administración espera tener un mejor manejo del negocio y seguir creciendo. 
 
 
 ## Diagrama E-R
@@ -38,13 +38,19 @@ Referirse al PDF 'diagrama_E_R_TCG_Store_Reyes.pdf' en el repositorio.
 
 El modelo de negocios corresponde a un tipo B2C. Principalmente, nos centramos en la venta de cartas y mercadería de distintas franquicias.
 
-El target que la administración tiene en mente es desde los 12 años a los 30 años, y esperan que significativamente pertenezcan al género masculino.
+El target que la administración tiene en mente es desde los 12 años a los 30 años, y esperan que una porción significativa del target, pertenezca al género masculino.
 
 En este momento, solo contamos con una locación, y por el momento, no tenemos ventas por internet, solo en tiendas.
-Se cuenta con un modelo de suscripciones, donde mandamos correos electrónicos con ofertas y descuentos a los clientes que se hayan inscritos. Éstos solo se pueden inscribir recurriendo a la tienda, y por un empleado. Dentro de estos descuentos que enviamos por correo, existe el descuento de cumpleaños, por lo que es importante que este campo sea completado.
+
+Se cuenta con un modelo de suscripciones, donde mandamos correos electrónicos con ofertas y descuentos a los clientes que se hayan inscrito.
+
+Éstos solo se pueden inscribir recurriendo a la tienda, y por la gestión de un empleado.
+
+Entre las informaciones que enviamos por correo, existe el descuento de cumpleaños, por lo que es importante que este campo sea completado.
 
 Los clientes pueden (o no) asociar sus compras a un empleado. La administración está pensando en implementar un sistema de comisiones.
-En cuanto a promociones, la administración ha determinado que solo se puede aplicar una promoción a los artículos, por cada lapso de tiempo. Es decir, al comprar un artículo, no se le puede aplicar la promoción de 'Black Friday', junto con el 'Descuento de empleado'. Las promociones se aplican a todos los artículos por igual, dentro del periodo estipulado.
+
+En cuanto a promociones, la administración ha determinado que solo se puede aplicar UNA promoción a los artículos, por cada lapso de tiempo. Es decir, al comprar un artículo, no se le puede aplicar la promoción de 'Black Friday', junto con el 'Descuento de empleado'. Las promociones se aplican a todos los artículos por igual, dentro del periodo estipulado.
 
 ## Apartado lista de tablas
 
