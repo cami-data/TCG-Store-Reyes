@@ -57,7 +57,8 @@ CREATE TABLE clientes (
     mail_cliente VARCHAR(50) NOT NULL UNIQUE,
     telefono_cliente VARCHAR(8) UNIQUE DEFAULT NULL,
     suscrito BOOL NOT NULL,
-    id_empleado_sus INT NOT NULL
+    id_empleado_sus INT NOT NULL,
+    cumpleanos_cliente_ss DATE
 );
 
 -- Agregar columna de cumpleaños (SS = Sin Suscripción, para diferenciarlo del campo en la suscripción en caso de que necesitemos esta diferencia):
