@@ -87,6 +87,9 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 - genero_cliente: Género del cliente. Tres tipos de géneros: 'M', 'F' y 'Otros'. 
 - mail_cliente: Mail del cliente. Puede estar vacío.
 - telefono_cliente: Teléfono del cliente. Puede estar vacío.
+- suscrito: Booleano. Identifica si el cliente está suscrito a comunicaciones comerciales.
+- id_empleado_sus: INT. Identifica cuál fue el empleado que suscribió al cliente al newsletter.
+- cumpleanos_cliente_ss: Contiene el cumpleaños del cliente.
 
 ### 🟣 Tabla 'productos':
 - id_producto: Clave primaria. Identifica al artículo.  
@@ -95,6 +98,8 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 - tipo_producto: Tipo del artículo. Ejemplo: Cartas individuales, juego de mesa, figuras, etc.
 - id_franquicia: Clave foránea. Identifica a la franquicia (o marca) a la que pertenece el artículo. Relacionada a la tabla 'franquicia'. El artículo solo puede tener una franquicia asociada.
 - imagen_URL: URL de la imagen del producto.
+- costo_producto: El costo del producto (en $ CLP).
+- cantidad_producto: Cantidad del producto en stock.
 
 ### 🟣 Tabla 'historial_stock':
 - id_stock: Clave primaria. Identifica el movimiento de stock. Relacionada a la tabla 'productos'.
@@ -114,6 +119,7 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 - fecha_venta: Fecha en que se realizó el artículo.
 - id_Pago: Clave foránea. Identifica el tipo de pago. Relacionada a la tabla 'formadepago'.
 - id_empleado: Clave foránea. Identifica al empleado que asistió a la venta. Puede estar vacío. Relacionada a la tabla 'empleados'.
+- descuento_aplicado: Descuento aplicado en caso de haber una promoción. Se escribe en decimales. Ejemplo: 10% = 0.10.
 
 ### 🟣 Tabla 'suscripciones':
 - id_suscripcion: Clave principal. Identifica a la suscripción. 
