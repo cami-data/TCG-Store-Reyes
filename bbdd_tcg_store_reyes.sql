@@ -1,3 +1,5 @@
+DROP SCHEMA tcg_store_reyes;
+
 CREATE SCHEMA IF NOT EXISTS `tcg_store_reyes`;
 
 -- Creación de tablas:
@@ -50,16 +52,21 @@ CREATE TABLE clientes (
 	id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre_cliente VARCHAR(40) NOT NULL,
     apellido_cliente VARCHAR(40) NOT NULL,
-    edad_cliente INT NOT NULL,
+    edad_cliente INT,
     genero_cliente VARCHAR(1) NOT NULL,
     mail_cliente VARCHAR(50) NOT NULL UNIQUE,
-    telefono_cliente VARCHAR(8) UNIQUE DEFAULT NULL
+    telefono_cliente VARCHAR(8) UNIQUE DEFAULT NULL,
+    suscrito BOOL NOT NULL,
+    id_empleado_sus INT NOT NULL
 );
+
+-- Agregar columna de cumpleaños (SS = Sin Suscripción, para diferenciarlo del campo en la suscripción en caso de que necesitemos esta diferencia):
+ALTER TABLE clientes ADD COLUMN cumpleanos_cliente_ss DATE;
 
 -- Regla: en el campo 'genero' solo se pueda ingresar uno de cuatro caracteres: 'M', 'H' u 'O'.
 ALTER TABLE clientes ADD CONSTRAINT chkgenero CHECK (genero_cliente IN('M', 'H', 'O'));
 
--- Tabla 'productos':
+-- Tabla 'productos'. Se agregaron dos columnas desde la entrega 1: costo_producto y cantidad_producto
 CREATE TABLE productos (
 	id_producto INT PRIMARY KEY AUTO_INCREMENT,
     nombre_producto VARCHAR(40) NOT NULL,
@@ -67,6 +74,8 @@ CREATE TABLE productos (
     tipo_producto VARCHAR (40) NOT NULL,
     id_franquicia INT,
     imagen_URL VARCHAR(2000),
+    costo_producto DECIMAL (10,0) NOT NULL,
+    cantidad_producto INT DEFAULT 0 NOT NULL,
     
 	FOREIGN KEY (id_franquicia) REFERENCES franquicia (id_franquicia)
 );
@@ -98,6 +107,7 @@ CREATE TABLE ventas (
     fecha_venta DATE NOT NULL,
     id_pago INT,
 	id_empleado INT,
+    descuento_aplicado decimal(3,2),
     
 	FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
@@ -108,15 +118,13 @@ CREATE TABLE ventas (
 
 -- Tabla 'suscripciones':
    
-CREATE TABLE suscripciones(
-    id_cliente INT PRIMARY KEY,
-    fecha_suscripcion DATE NOT NULL,
-    mail_cliente_sus VARCHAR(50) NOT NULL UNIQUE, 
-    cumpleanos_cliente DATE NOT NULL,
-    id_empleado INT,
-    
-    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
-    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
-);
-
-
+	CREATE TABLE suscripciones(
+		id_cliente INT PRIMARY KEY,
+		fecha_suscripcion DATE NOT NULL,
+		mail_cliente_sus VARCHAR(50) NOT NULL UNIQUE, 
+		cumpleanos_cliente DATE,
+		id_empleado INT,
+		
+		FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+		FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
+	);
