@@ -14,6 +14,10 @@
 4. [Diagrama E-R](#diagrama-e-r)
 5. [Modelo de negocios](#modelo-de-negocios)
 6. [Apartado Lista de tablas](#apartado-lista-de-tablas)
+7. [Lista de funciones](#lista-de-funciones)
+8. [Lista de triggers](#lista-de-triggers)
+9. [Lista de vistas](#lista-de-vistas)
+10. [Lista de Stored Procedures](#lista-de-stored-procedures)
 
 ## Introducción
 
@@ -25,7 +29,7 @@ Se realizará una base de datos con tablas, correspondientes a una tienda fictic
 El objetivo del trabajo es poder descubrir insights del negocio, que puedan ayudar al crecimiento de éste. Además, extraer estrategias que puedan aumentar la satisfacción tanto de nuestros consumidores, como de nuestros empleados. Por último, la administración espera conocer más a sus consumidores y poder reafirmar o cambiar algunas concepciones que tienen de ellos: edad, género, comportamientos de compra, etc. 
 
 
-## Situación Problematica
+## Situación Problemática
 
 Actualmente, la tienda ha crecido exponencialmente, debido a la creciente popularidad de las cartas y los juegos de mesa. Por tanto, queremos tener un control más riguroso de los datos que se recolectan de la tienda día a día, tales como: ventas, datos de clientes, etc. Con esto, la administración espera tener un mejor manejo del negocio y seguir creciendo. 
 
@@ -128,3 +132,102 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 - mail_cliente_sus: Email donde la empresa enviará correos corporativos, de descuentos y de promociones.
 - cumpleanos_cliente: Fecha de cumpleaños del cliente.
 - id_empleado: Clave foránea. Identifica al empleado que ha sido responsable de inscribir al cliente en la base de datos de la tienda.
+
+## Lista de funciones
+```sh
+1. Función "fn_ingresos_totales_producto": 
+- Descripción: Calcular los ingresos totales de un producto.
+- Objetivo: Para evaluar las ventas o acciones comerciales a realizar, para productos específicos. 
+- Tablas usadas: Trabaja en la tabla 'ventas'.
+
+2. Función "fn_dias_ultima_compra":
+- Descripción: Calcular los días que han transcurrido desde la compra de un cliente en específico.
+- Objetivo: Para evaluar las ventas o acciones comerciales, para productos clientes en específicos, e ingresar a sus datos fácilmente.  
+- Tablas usadas: Trabaja en la tabla 'ventas'.
+
+3. Función "fn_ingresos_totales_dia":
+- Descripción: Calcular ingresos de un día en específico.
+- Objetivo: Útil para dias de alta venta, como Black Friday. 
+- Tablas usadas: Trabaja en la tabla 'ventas'.
+
+```
+
+## Lista de Triggers
+```sh
+1. Trigger "buscar_descuento_aplicado":
+- Descripción: Busca el descuento de la promoción, con el id_promo. Debe revisar si la promoción está o no activa. 
+- Objetivo: Con el objetivo de corroborar que la promoción esté activa y evitar errores en los descuentos.
+- Tablas usadas: Actúa al ingresar una venta en la tabla de 'ventas'.
+
+2. Trigger "calcular_precios_venta":
+- Descripción: Trigger para calcular el precio final de la compra, considerando el precio al que se vendió el producto y la cantidad comprada. Trigger que toma el precio del producto desde la tabla 'productos', identificando el id del producto.  
+- Objetivo: Tiene el objetivo de evitar errores en el tipeo del importe total de las compras y en el precio de los productos.
+- Tablas usadas: Se activa al registrar una venta en la tabla 'ventas'.
+
+3. Trigger "calcular_edad_clientes":
+- Descripción: Crear un trigger para que calcule la edad al momento de ingresar al cliente en el sistema. 
+- Objetivo: Con el objetivo de no tener que calcular manualmente la edad de las personas e insertarlo automáticamente en la tabla de 'clientes'.
+- Tablas usadas: Se activa al registrar a un cliente en la tabla 'clientes'.
+
+4. Trigger "suscripcion_insercion_cliente":
+- Descripción: Hacer una nueva inserción en la tabla 'suscripciones', si el cliente aceptó estar suscrito.
+- Objetivo: Tener un registro de los clientes suscritos y acceder a sus datos.
+- Tablas usadas: Se activa al registrar a un cliente en la tabla 'clientes' y suscrito = 1. 
+
+5. Trigger "insercion_stock":
+- Descripción: Trigger para llevar los registros de inserción de stock en nuevos productos.
+- Objetivo: Con el fin de tener un control de los movimientos de stock y de nuevos productos que ingresa en la tabla 'productos'.
+- Tablas usadas: Actúa en la tabla de 'historial_stock'.
+
+6. Trigger "insercion_stock_existente":
+- Descripción: Trigger que adiciona el registro de aumento en stock de productos existentes.
+- Objetivo: Con el fin de tener un control de los movimientos de stock de productos existentes.
+- Tablas usadas: Actúa en la tabla de 'historial_stock'
+```
+
+## Lista de Vistas
+```sh
+1. Vista "mejores_clientes":
+- Descripción: Vista que nos muestra a los clientes que más han comprado.
+- Objetivo: Para saber hacia que clientes podemos tomar ciertas acciones comerciales.
+- Tablas usadas: Trabaja con la tabla 'ventas'.
+
+2. Vista "resumen_comercial":
+- Descripción: Vista donde nos da una vista comercial de los productos.
+- Objetivo: Podemos observar los precios, los costos, los márgenes brutos (expresados en $ CLP) y margen porcentual (expresado en decimales).
+- Tablas usadas: Ordenado por los márgenes porcentuales descendientemente.
+
+3. Vista "franquicias_reporte":
+- Descripción: Ventas agrupadas por franquicias, ordenado por las franquicias que más ventas tienen descendientemente.
+- Objetivo: Vista comercial de cada una de las líneas de negocios.
+- Tablas usadas: Trabaja con la tabla 'ventas' y 'franquicia'.
+
+4. Vista "reporte_empleados":
+- Descripción: Vistas las ventas atribuidas a los distintos trabajadores, cuántos artículos vendio, cuántas ventas y el ticket promedio.
+- Objetivo: Para considerar incentivos para los empleados que más venden.
+- Tablas usadas: Trabaja con la tabla 'ventas' y 'empleados'.
+
+5. Vista "clientes_ultima_compra":
+- Descripción: Ver la última vez que los clientes compraron, ordenados desde los clientes que compraron hace más tiempo.
+- Objetivo: Para recuperar clientes que no han comprado hace mucho.
+- Tablas usadas: Trabaja con la tabla 'ventas' y 'clientes'.
+```
+
+## Lista de Stored Procedures
+```sh
+1. Stored procedures "sp_historial_cliente":
+- Descripción: Stored procedure para saber cuánto ha comprado un cliente. 
+- Objetivo: Nos sirve cuando queremos saber cuáles son nuestros clientes más valiosos o que han comprado poco, para realizar acciones comerciales con ellos.
+- Tablas usadas: Usa las tablas 'ventas' y 'clientes'.
+
+2. Stored procedures "sp_cambiar_precios":
+- Descripción: Stored procedure que nos permita cambiar todos los precios de una franquicia.
+- Objetivo: Funciona tanto para aumentar precios, como para descontarlos, siempre y cuando sean números enteros. Útil cuando tenemos descuentos en una sola línea de franquicias y no queremos cambiar todos los precios manualmente.
+- Tablas usadas: Usa las tablas 'productos' y 'franquicias'.
+
+3. Stored procedures "sp_ingresar_nuevo_producto":
+- Descripción: Stored procedure para ingresar productos, a través de la ventana interactiva. También se puede hacer con CALL (procedure).
+- Objetivo: Hace más fácil el ingreso de nuevos productos a la tabla 'productos'.
+- Tablas usadas: Trabaja con la tabla 'productos'.
+
+```
