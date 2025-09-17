@@ -289,3 +289,10 @@ Se adjunta además en el archivo 'DCL_permisos_usuarios.sql', donde se crean dos
 El primero de 'marketing', donde solo tiene permisos para consultar la tabla de 'ventas'.
 Y el otro, de 'jefa de local', donde tiene permisos absolutos, al tener una mayor responsabilidad.
 ```
+
+## Backup
+
+```sh
+Se adjunta en el repositorio un archivo, donde se encuentra el backup de la información. Su nombre es 'backup.sql'.
+```
+
