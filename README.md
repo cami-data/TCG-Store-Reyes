@@ -18,8 +18,9 @@
 8. [Lista de triggers](#lista-de-triggers)
 9. [Lista de vistas](#lista-de-vistas)
 10. [Lista de Stored Procedures](#lista-de-stored-procedures)
-11. [Informes](#Informes)
-12. [DCL](#DCL)
+11. [Transacciones y DCL](#transacciones-y-dcl)
+12. [Informes](#Informes)
+13. [DCL](#DCL)
 
 ## Introducción
 
@@ -266,12 +267,21 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 
 ```
 
+## Lista de transacciones y DCL
+
+```sh
+En el archivo 'transacciones.sql', se adiciona una transacción para reversar inserciones en la tabla de 'ventas',
+con un ejemplo interactivo.
+
+Además, en el archivo 'DCL_permisos_usuarios.sql', se deja un ejercicio de creación de usuarios para distintos propósitos.
+```
+
 ## Informes: 
 
 Se realizó una exportación de los datos a Power BI, con lo que se armó un dashboard muy simple.
 Podemos encontrar el respaldo de las consultas en el archivo 'informes.sql', en el repositorio.
 <p align="center">
-<img width="700" height="723" alt="image" src="https://github.com/user-attachments/assets/282fef21-e7f3-45eb-9604-9400146140ca" />
+<img width="1145" height="636" alt="image" src="https://github.com/user-attachments/assets/35fa9d24-cae0-41dd-9076-69ebf8dd147c" />
 </p>
 
 ## DCL
