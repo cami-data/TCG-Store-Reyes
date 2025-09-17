@@ -18,6 +18,7 @@
 8. [Lista de triggers](#lista-de-triggers)
 9. [Lista de vistas](#lista-de-vistas)
 10. [Lista de Stored Procedures](#lista-de-stored-procedures)
+11. [Informes](#Informes)
 
 ## Introducción
 
@@ -36,7 +37,9 @@ Actualmente, la tienda ha crecido exponencialmente, debido a la creciente popula
 
 ## Diagrama E-R
 
-Referirse al PDF 'diagrama_E_R_TCG_Store_Reyes.pdf' en el repositorio.
+<p align="center">
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/c8c4b0d7-1b11-40c7-ac02-e7138f1d59e7" />
+</p>
 
 ## Modelo de Negocios
 
@@ -59,79 +62,109 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 ## Apartado lista de tablas
 
 ### 🟣 Tabla 'empleados': 
-- id_empleado: Clave principal. Identifica al empleado. Relacionada a la tabla 'ventas' y 'suscripciones'
-- nombre_empleado: Nombre del empleado.
-- apellido_empleado: Apellido del empleado.
-- mail_empleado: Mail del empleado.
-- telefono_empleado: Teléfono del empleado.
-- cargo_empleado: Cargo en la empresa del empleado. 
-- sueldo_empleado: Sueldo en CLP (pesos chilenos) del empleado.
+
+| Campo             | Tipo de dato     | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                                 |
+|-------------------|-----------------|----------|-------------|-------------|--------|-----------------------------------------------------------------------------|
+| id_empleado       | INT AUTO_INCREMENT | SI    | SI          | NO          | SI     | Identifica al empleado. Relacionada a las tablas 'ventas' y 'suscripciones'. |
+| nombre_empleado   | VARCHAR(40)     | SI       | NO          | NO          | NO     | Nombre del empleado.                                                        |
+| apellido_empleado | VARCHAR(40)     | SI       | NO          | NO          | NO     | Apellido del empleado.                                                      |
+| mail_empleado     | VARCHAR(50)     | SI       | NO          | NO          | SI     | Mail del empleado.                                                          |
+| telefono_empleado | VARCHAR(8)      | SI       | NO          | NO          | SI     | Teléfono del empleado.                                                      |
+| cargo_empleado    | VARCHAR(20)     | SI       | NO          | NO          | NO     | Cargo en la empresa del empleado.                                           |
+| sueldo_empleado   | DECIMAL(10,0)   | SI       | NO          | NO          | NO     | Sueldo en CLP (pesos chilenos) del empleado.                                |
 
 ### 🟣 Tabla 'franquicia':
-- id_franquicia: Clave primaria. Identifica la franquicia a la que pertenece el artículo. Relacionada a la tabla 'productos'.
-- nombre_franquicia: Nombre de la franquicia. Ejemplo: Pokemon, Yugioh, etc.
+
+| Campo            | Tipo de dato | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                                 |
+|------------------|--------------|----------|-------------|-------------|--------|-----------------------------------------------------------------------------|
+| id_franquicia    | INT AUTO_INCREMENT| SI  | SI          | NO          | SI     | Identifica la franquicia a la que pertenece el artículo. Relacionada a la tabla 'productos'. |
+| nombre_franquicia| VARCHAR(40)  | SI       | NO          | NO          | NO     | Nombre de la franquicia. Ejemplo: Pokémon, Yu-Gi-Oh, etc.                   |
+
 
 ### 🟣 Tabla 'promociones':
-- id_promo: Identifica a la promoción. Relacionada a la tabla 'ventas'.
-- nombre_promo: Nombre de la promoción. Ejemplo: Black friday.
-- porcentaje_promo: Porcentaje de la promoción, expresado en decimales. Ejemplo: si es un 50% de dcto., se debe escribir como '0,5'.
-- fechainicio_promo: Fecha de inicio de la promoción.
-- fechafinal_promo: Fecha de finalización de la promoción.
-- estado: De tipo booleano. True: Promoción activa. False: promoción inactiva.
+| Campo             | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                               |
+|-------------------|--------------------|----------|-------------|-------------|--------|---------------------------------------------------------------------------|
+| id_promo          | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Identifica a la promoción. Relacionada a la tabla 'ventas'.               |
+| nombre_promo      | VARCHAR(40)        | SI       | NO          | NO          | NO     | Nombre de la promoción. Ejemplo: Black Friday.                            |
+| porcentaje_promo  | DECIMAL(3,2)       | NO       | NO          | NO          | NO     | Porcentaje de la promoción Ejemplo: 0.50 para 50%.                      |
+| fechainicio_promo | DATE               | SI       | NO          | NO          | NO     | Fecha de inicio de la promoción.                                          |
+| fechafinal_promo  | DATE               | SI       | NO          | NO          | NO     | Fecha de finalización de la promoción.                                    |
+| estado            | BOOL               | SI       | NO          | NO          | NO     | Estado de la promoción. True = activa, False = inactiva.                  |
+
 
 ### 🟣 Tabla 'formadepago':
-- id_pago: Clave primaria. Relacionada a la tabla 'ventas'.
-- nombre_pago: Nombre del método de pago: Ejemplo: 'Efectivo', 'Debito', etc.
+
+| Campo       | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                           |
+|-------------|--------------------|----------|-------------|-------------|--------|-------------------------------------------------------|
+| id_pago     | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Identifica al pago. Relacionada a la tabla 'ventas'.      |
+| nombre_pago | VARCHAR(40)        | SI       | NO          | NO          | NO     | Nombre del método de pago. Ejemplo: 'Efectivo', 'Débito', etc. |
+
 
   ### 🟣 Tabla 'clientes':
-- id_cliente: Clave primaria. Identifica al cliente. Relacionada a la tabla 'suscripciones' y 'ventas'.
-- nombre_cliente: Nombre del cliente.
-- apellido_cliente: Apellido del cliente.
-- edad_cliente: Edad del cliente como número entero y sin la palabra 'años'.
-- genero_cliente: Género del cliente. Tres tipos de géneros: 'M', 'F' y 'Otros'. 
-- mail_cliente: Mail del cliente. Puede estar vacío.
-- telefono_cliente: Teléfono del cliente. Puede estar vacío.
-- suscrito: Booleano. Identifica si el cliente está suscrito a comunicaciones comerciales.
-- id_empleado_sus: INT. Identifica cuál fue el empleado que suscribió al cliente al newsletter.
-- cumpleanos_cliente_ss: Contiene el cumpleaños del cliente.
+| Campo                  | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                          |
+|------------------------|--------------------|----------|-------------|-------------|--------|----------------------------------------------------------------------|
+| id_cliente             | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Identifica al cliente. Relacionada a la tabla 'suscripciones' y 'ventas'. |
+| nombre_cliente         | VARCHAR(40)        | SI       | NO          | NO          | NO     | Nombre del cliente.                                                  |
+| apellido_cliente       | VARCHAR(40)        | SI       | NO          | NO          | NO     | Apellido del cliente.                                                |
+| edad_cliente           | INT                | NO       | NO          | NO          | NO     | Edad del cliente como número entero y sin la palabra 'años'.         |
+| genero_cliente         | VARCHAR(1)         | SI       | NO          | NO          | NO     | Género del cliente: 'M', 'F' u 'Otros'.                              |
+| mail_cliente           | VARCHAR(50)        | SI       | NO          | NO          | SI     | Mail del cliente.|
+| telefono_cliente       | VARCHAR(8)         | NO       | NO          | NO          | SI     | Teléfono del cliente.                           |
+| suscrito               | BOOL               | SI       | NO          | NO          | NO     | Identifica si el cliente está suscrito a comunicaciones comerciales. |
+| id_empleado_sus        | INT                | SI       | NO          | SI          | NO     | Identifica qué empleado suscribió al cliente al newsletter.          |
+| cumpleanos_cliente_ss  | DATE               | NO       | NO          | NO          | NO     | Contiene el cumpleaños del cliente.                                  |
 
 ### 🟣 Tabla 'productos':
-- id_producto: Clave primaria. Identifica al artículo.  
-- nombre_producto: Nombre del artículo.
-- precio_producto: Precio del artículo.
-- tipo_producto: Tipo del artículo. Ejemplo: Cartas individuales, juego de mesa, figuras, etc.
-- id_franquicia: Clave foránea. Identifica a la franquicia (o marca) a la que pertenece el artículo. Relacionada a la tabla 'franquicia'. El artículo solo puede tener una franquicia asociada.
-- imagen_URL: URL de la imagen del producto.
-- costo_producto: El costo del producto (en $ CLP).
-- cantidad_producto: Cantidad del producto en stock.
+
+| Campo             | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                               |
+|-------------------|--------------------|----------|-------------|-------------|--------|---------------------------------------------------------------------------|
+| id_producto       | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Clave primaria. Identifica al artículo.                                   |
+| nombre_producto   | VARCHAR(40)        | SI       | NO          | NO          | NO     | Nombre del artículo.                                                      |
+| precio_producto   | DECIMAL(10,0)      | SI       | NO          | NO          | NO     | Precio del artículo.                                                      |
+| tipo_producto     | VARCHAR(40)        | SI       | NO          | NO          | NO     | Tipo del artículo. Ejemplo: Cartas individuales, figuras, etc. |
+| id_franquicia     | INT                | NO       | NO          | SI          | NO     | Identifica a la franquicia (o marca) a la que pertenece el artículo. |
+| imagen_URL        | VARCHAR(2000)      | NO       | NO          | NO          | NO     | URL de la imagen del producto.                                            |
+| costo_producto    | DECIMAL(10,0)      | SI       | NO          | NO          | NO     | El costo del producto (en $ CLP).                                         |
+| cantidad_producto | INT DEFAULT 0      | SI       | NO          | NO          | NO     | Cantidad del producto en stock.                                           |
+
 
 ### 🟣 Tabla 'historial_stock':
-- id_stock: Clave primaria. Identifica el movimiento de stock. Relacionada a la tabla 'productos'.
-- id_producto: Clave foránea. Identifica el artículo al que pertenece el movimiento de stock. Relacionada a la tabla 'productos'.
-- tipoMovimiento_stock: Movimiento de entrada o salida de stock. 
-- cantidad_stock: Cantidad de stock del producto en existencia. 
-- fechaMovimiento_stock: Fecha en que entró o salió el producto. 
+
+| Campo                 | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                           |
+|------------------------|--------------------|----------|-------------|-------------|-------|----------------------------------------------------------------------|
+| id_stock              | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Identifica el movimiento de stock. Relacionada a la tabla 'productos'.|
+| id_producto           | INT                | NO       | NO          | SI          | NO     | Identifica el artículo al que pertenece el movimiento de stock. |
+| tipoMovimiento_stock  | VARCHAR(40)        | SI       | NO          | NO          | NO     | Movimiento de entrada o salida de stock. Sólo puede ser 'entrada' o 'salida'. |
+| cantidad_stock        | INT                | SI       | NO          | NO          | NO     | Cantidad de stock del producto en existencia.                         |
+| fechaMovimiento_stock | DATE               | SI       | NO          | NO          | NO     | Fecha en que entró o salió el producto.                               |
+
 
 ### 🟣 Tabla 'ventas':
-- id_venta: Clave primaria. Identifica a la venta. 
-- id_cliente: Clave foránea. Identifica al cliente. Relacionada a la tabla 'clientes'.
-- id_producto: Clave foránea. Identifica al producto. Relacionada a la tabla 'productos'.
-- cantidad_producto: Cantidad de productos del mismo tipo vendidos. 
-- precioOriginal_venta: Precio de venta sin la promoción.
-- precioFinal_venta: Precio de venta con la promoción. Puede ser igual al precio de venta, si es que no hay promociones activas.
-- id_promo: Clave foránea. Identifica que promoción se le aplica al precio de venta. Relacionada a la tabla 'promociones'. Puede ir vacío.
-- fecha_venta: Fecha en que se realizó el artículo.
-- id_Pago: Clave foránea. Identifica el tipo de pago. Relacionada a la tabla 'formadepago'.
-- id_empleado: Clave foránea. Identifica al empleado que asistió a la venta. Puede estar vacío. Relacionada a la tabla 'empleados'.
-- descuento_aplicado: Descuento aplicado en caso de haber una promoción. Se escribe en decimales. Ejemplo: 10% = 0.10.
+
+| Campo               | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                             |
+|----------------------|--------------------|----------|-------------|-------------|--------|------------------------------------------------------------------------|
+| id_venta            | INT AUTO_INCREMENT | SI       | SI          | NO          | SI     | Identifica a la venta.                                  |
+| id_cliente          | INT                | SI       | NO          | SI          | NO     | Identifica al cliente. Relacionada a la tabla 'clientes'.|
+| id_producto         | INT                | SI       | NO          | SI          | NO     | Identifica al producto. Relacionada a la tabla 'productos'.  |
+| cantidad_producto   | INT                | SI       | NO          | NO          | NO     | Cantidad de productos del mismo tipo vendidos.                          |
+| precioOriginal_venta| DECIMAL(10,0)      | SI       | NO          | NO          | NO     | Precio de venta sin la promoción.                                       |
+| precioFinal_venta   | DECIMAL(10,0)      | SI       | NO          | NO          | NO     | Precio final de la venta. Considera cantidad y promoción aplicada.|
+| id_promo            | INT                | NO       | NO          | SI          | NO     | Identifica qué promoción se aplicó a la venta. |
+| fecha_venta         | DATE               | SI       | NO          | NO          | NO     | Fecha en que se realizó la venta.                                       |
+| id_pago             | INT                | SI       | NO          | SI          | NO     | Identifica el tipo de pago. Relacionada a la tabla 'formadepago'. |
+| id_empleado         | INT                | NO       | NO          | SI          | NO     | Identifica al empleado que asistió la venta. |
+| descuento_aplicado  | DECIMAL(3,2)       | NO       | NO          | NO          | NO     | Descuento aplicado en caso de promoción. Ejemplo: 10% = 0.10.           |
+
 
 ### 🟣 Tabla 'suscripciones':
-- id_suscripcion: Clave principal. Identifica a la suscripción. 
-- id_cliente: Clave foránea. Identifica al cliente que está suscrito. Relacionada a la tabla 'clientes'.
-- fecha_suscripcion: Fecha en que el cliente se suscribió.
-- mail_cliente_sus: Email donde la empresa enviará correos corporativos, de descuentos y de promociones.
-- cumpleanos_cliente: Fecha de cumpleaños del cliente.
-- id_empleado: Clave foránea. Identifica al empleado que ha sido responsable de inscribir al cliente en la base de datos de la tienda.
+
+| Campo              | Tipo de dato       | NOT NULL | Primary Key | Foreign Key | Unique | Descripción                                                              |
+|---------------------|--------------------|----------|-------------|-------------|--------|-------------------------------------------------------------------------|
+| id_cliente          | INT                | SI       | SI          | SI          | SI     | Identifica al cliente que está suscrito. Relacionada a la tabla 'clientes'. |
+| fecha_suscripcion   | DATE               | SI       | NO          | NO          | NO     | Fecha en que el cliente se suscribió.                                   |
+| mail_cliente_sus    | VARCHAR(50)        | SI       | NO          | NO          | SI     | Email donde se enviarán correos corporativos, descuentos y promociones. |
+| cumpleanos_cliente  | DATE               | NO       | NO          | NO          | NO     | Fecha de cumpleaños del cliente.                                        |
+| id_empleado         | INT                | NO       | NO          | SI          | NO     | Identifica al empleado que inscribió al cliente.         |
 
 ## Lista de funciones
 ```sh
@@ -231,3 +264,11 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 - Tablas usadas: Trabaja con la tabla 'productos'.
 
 ```
+
+## Informes: 
+
+Se realizó una exportación de los datos a Power BI, con lo que se armó un dashboard muy simple.
+Podemos encontrar el respaldo de las consultas en el archivo 'informes.sql', en el repositorio.
+<p align="center">
+<img width="700" height="723" alt="image" src="https://github.com/user-attachments/assets/282fef21-e7f3-45eb-9604-9400146140ca" />
+</p>
