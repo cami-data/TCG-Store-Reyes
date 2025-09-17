@@ -21,6 +21,7 @@
 11. [Transacciones](#transacciones-y-dcl)
 12. [Informes](#Informes)
 13. [DCL](#DCL)
+14. [Backup](#Backup)
 
 ## Introducción
 
