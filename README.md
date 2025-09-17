@@ -18,7 +18,7 @@
 8. [Lista de triggers](#lista-de-triggers)
 9. [Lista de vistas](#lista-de-vistas)
 10. [Lista de Stored Procedures](#lista-de-stored-procedures)
-11. [Transacciones y DCL](#transacciones-y-dcl)
+11. [Transacciones](#transacciones-y-dcl)
 12. [Informes](#Informes)
 13. [DCL](#DCL)
 
@@ -267,13 +267,11 @@ En cuanto a promociones, la administración ha determinado que solo se puede apl
 
 ```
 
-## Lista de transacciones y DCL
+## Transacciones
 
 ```sh
 En el archivo 'transacciones.sql', se adiciona una transacción para reversar inserciones en la tabla de 'ventas',
 con un ejemplo interactivo.
-
-Además, en el archivo 'DCL_permisos_usuarios.sql', se deja un ejercicio de creación de usuarios para distintos propósitos.
 ```
 
 ## Informes: 
