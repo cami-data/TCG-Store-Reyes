@@ -19,6 +19,7 @@
 9. [Lista de vistas](#lista-de-vistas)
 10. [Lista de Stored Procedures](#lista-de-stored-procedures)
 11. [Informes](#Informes)
+12. [DCL](#DCL)
 
 ## Introducción
 
@@ -272,3 +273,11 @@ Podemos encontrar el respaldo de las consultas en el archivo 'informes.sql', en 
 <p align="center">
 <img width="700" height="723" alt="image" src="https://github.com/user-attachments/assets/282fef21-e7f3-45eb-9604-9400146140ca" />
 </p>
+
+## DCL
+
+```sh
+Se adjunta además en el archivo 'DCL_permisos_usuarios.sql', donde se crean dos usuarios, que cumplen roles distintos.
+El primero de 'marketing', donde solo tiene permisos para consultar la tabla de 'ventas'.
+Y el otro, de 'jefa de local', donde tiene permisos absolutos, al tener una mayor responsabilidad.
+```
